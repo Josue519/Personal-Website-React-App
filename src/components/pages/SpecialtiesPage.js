@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faCode, faCloud, faDumbbell, faPalette, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Card from '../common/Card';
 import { GlobalStyle } from '../../styles/globals';
-import Navbar from '../Navbar/Navbar';
 
 const Container = styled.div`
   max-width: 1100px;
@@ -170,7 +169,6 @@ const SpecialtiesPage = () => {
   return (
     <>
       <GlobalStyle />
-      <Navbar showThemeToggle={false} />
       <Container>
         <Title>Specialties</Title>
         <p style={{paddingBottom: '2rem'}}>

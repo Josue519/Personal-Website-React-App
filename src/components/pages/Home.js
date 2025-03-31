@@ -11,7 +11,6 @@ import JourneySection from '../Journey/JourneySection';
 import EducationSection from '../EducationSection';
 import SkillsSection from '../Skills/SkillsSection';
 import ProfileSection from '../ProfileSection';
-import Navbar from '../Navbar/Navbar';
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -26,7 +25,6 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <Navbar isDark={darkMode} toggleTheme={toggleDarkMode} showThemeToggle={true} />
       <Section id="profile">
         <ProfileSection />
       </Section>

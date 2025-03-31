@@ -11,7 +11,7 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: ${({ theme }) => theme.card};
   backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -31,11 +31,12 @@ const NavLinks = styled.div`
     top: 64px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: ${({ theme }) => theme.card};
     padding: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 10px 10px;
     display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+    border: 1px solid ${({ theme }) => theme.cardBorder};
   }
 `;
 
@@ -43,18 +44,20 @@ const NavLink = styled(Link)`
   color: ${({ theme }) => theme.text};
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 5px;
 
   &:hover {
     color: var(--clr-accent);
-    background: linear-gradient(135deg, rgba(84, 185, 255, 0.1), rgba(128, 0, 128, 0.1));
+    background: ${({ theme }) => theme.cardBorder};
   }
 
   @media (max-width: 768px) {
     padding: 1rem;
     font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
   }
 `;
 
@@ -72,13 +75,18 @@ const MenuButton = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 1001;
+  padding: 0.5rem;
+
+  &:hover {
+    color: var(--clr-accent);
+  }
 
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
-const Navbar = ({ showThemeToggle }) => {
+const Navbar = ({ isDark, toggleTheme, showThemeToggle }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -120,7 +128,7 @@ const Navbar = ({ showThemeToggle }) => {
         <NavLink to="/specialties">Specialties</NavLink>
         <NavLink to="/projects">Projects</NavLink>
       </NavLinks>
-      {showThemeToggle && <ThemeToggle />}
+      {showThemeToggle && <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />}
     </NavbarContainer>
   );
 };

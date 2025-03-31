@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SpecialtiesPage from './pages/SpecialtiesPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetail from './Projects/ProjectDetail';
 import Navbar from './Navbar/Navbar';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/globals';
@@ -17,17 +18,18 @@ const StyledComponent = styled.div`
 `;
 
 const App = () => {
-  const { darkMode } = useContext(ThemeContext);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
   return (
     <StyledThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Router>
-        <Navbar />
+        <Navbar isDark={darkMode} toggleTheme={toggleDarkMode} showThemeToggle={true} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/specialties" element={<SpecialtiesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
         </Routes>
       </Router>
     </StyledThemeProvider>
