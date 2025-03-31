@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -44,16 +44,56 @@ const ImageGallery = styled.div`
   margin-bottom: 2rem;
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+`;
+
+const ModalImage = styled.img`
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
 const GalleryImage = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px var(--shadow);
-  transition: transform 0.3s ease;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(var(--clr-accent-rgb), 0.2);
   }
 `;
 
@@ -129,6 +169,7 @@ const GitHubButton = styled(PrimaryButton)`
 const ProjectDetail = () => {
   const { id } = useParams();
   const project = projects.find(p => p.id === parseInt(id));
+  const [selectedImage, setSelectedImage] = useState(null);
 
   if (!project) {
     return (
@@ -159,7 +200,12 @@ const ProjectDetail = () => {
 
       <ImageGallery>
         {project.images.map((image, index) => (
-          <GalleryImage key={index} src={image} alt={`${project.title} screenshot ${index + 1}`} />
+          <GalleryImage 
+            key={index} 
+            src={image} 
+            alt={`${project.title} screenshot ${index + 1}`}
+            onClick={() => setSelectedImage(image)}
+          />
         ))}
       </ImageGallery>
 
@@ -175,6 +221,17 @@ const ProjectDetail = () => {
           View Project on GitHub
         </GitHubButton>
       </div>
+
+      {selectedImage && (
+        <Modal onClick={() => setSelectedImage(null)}>
+          <CloseButton onClick={() => setSelectedImage(null)}>&times;</CloseButton>
+          <ModalImage 
+            src={selectedImage} 
+            alt={`${project.title} expanded view`}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </Modal>
+      )}
     </Container>
   );
 };

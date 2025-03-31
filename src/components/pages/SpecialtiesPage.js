@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faCode, faCloud, faDumbbell, faPalette, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Card from '../common/Card';
 import { GlobalStyle } from '../../styles/globals';
+import { PrimaryButton } from '../common/Button';
 
 const Container = styled.div`
   max-width: 1100px;
@@ -50,23 +51,15 @@ const SectionContent = styled.div`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
 `;
 
-const FloatingButton = styled.button`
+const FloatingButton = styled(PrimaryButton)`
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: var(--clr-accent);
-  color: white;
-  border: none;
-  border-radius: 50px;
   padding: 1rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: darken(var(--clr-accent), 10%);
-  }
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1000;
 `;
 
 const specialtiesData = {
@@ -154,16 +147,22 @@ const specialtiesData = {
 };
 
 const SpecialtiesPage = () => {
-  const [openSection, setOpenSection] = useState(null);
+  const [openSections, setOpenSections] = useState({
+    tech: false,
+    fitness: false,
+    design: false
+  });
 
   const toggleSection = (section) => {
-    setOpenSection(openSection === section ? null : section);
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
   const handleBookCall = () => {
-    const subject = encodeURIComponent('Request for Call');
-    const body = encodeURIComponent('I would like to schedule a call. Please let me know your available times.');
-    window.location.href = `mailto:marantefitness@gmail.com?subject=${subject}&body=${body}`;
+    // Add your booking logic here
+    console.log('Booking call...');
   };
 
   return (
@@ -182,9 +181,9 @@ const SpecialtiesPage = () => {
           <div key={section}>
             <SectionHeader onClick={() => toggleSection(section)}>
               {section.replace(/^\w/, (c) => c.toUpperCase())}
-              <FontAwesomeIcon icon={openSection === section ? faChevronUp : faChevronDown} />
+              <FontAwesomeIcon icon={openSections[section] ? faChevronUp : faChevronDown} />
             </SectionHeader>
-            <SectionContent $isOpen={openSection === section}>
+            <SectionContent $isOpen={openSections[section]}>
               {specialtiesData[section].map((specialty) => (
                 <Card key={specialty.name}>
                   <h2>
@@ -199,7 +198,8 @@ const SpecialtiesPage = () => {
       </Container>
 
       <FloatingButton onClick={handleBookCall}>
-        <FontAwesomeIcon icon={faPhone} /> Book a Call
+        <FontAwesomeIcon icon={faPhone} />
+        Book a Call
       </FloatingButton>
     </>
   );
