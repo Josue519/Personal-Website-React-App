@@ -321,22 +321,20 @@ const ProfileSection = () => {
   const [isTyping, setIsTyping] = useState(true);
   
   const titles = [
-    "UI/UX Designer",
-    "Technology Consultant",
     "Software Developer",
-    "Certified Personal Trainer",
-    "Front-End Developer",
-    "Cloud Services Specialist",
-    "API Integration Expert",
-    "Nutrition Coach",
-    "Content Creator",
-    "Event Planner"
+    "Front-End Engineer",
+    "iOS Developer",
+    "React Specialist",
+    "UI/UX Developer",
+    "Full-Stack Developer",
+    "Mobile App Developer",
+    "Web Solutions Architect"
   ];
   
   useEffect(() => {
-    const typingDuration = 4000; // 4 seconds for typing
-    const displayDuration = 2000; // 2 seconds to display the full text
-    const eraseDuration = 1500; // 1.5 seconds for erasing
+    const typingDuration = 4000;
+    const displayDuration = 2000;
+    const eraseDuration = 1500;
     
     const typingTimer = setTimeout(() => {
       setIsTyping(false);
@@ -367,7 +365,6 @@ const ProfileSection = () => {
           </ShapeSVG>
         </BackgroundShapes>
         
-        {/* Left side content */}
         <ContentSection id="about-me">
           <Title>Josue Marante</Title>
           <TypewriterContainer>
@@ -380,11 +377,11 @@ const ProfileSection = () => {
             </TypewriterText>
           </TypewriterContainer>
           <BioText>
-            I am a Technology Consultant, Software Developer, and Certified Personal Trainer. 
-            I offer a wide range of services that integrate technology, business consulting, 
-            and health & wellness. My expertise spans software development, IT infrastructure 
-            consulting, process optimization, and personal training, allowing me to provide 
-            customized solutions for both businesses and individuals.
+            I am a passionate Software Developer specializing in modern web and iOS development.
+            With expertise in React, Swift, and front-end technologies, I create elegant,
+            user-centric applications that combine beautiful design with robust functionality.
+            My focus is on delivering clean, efficient code and creating exceptional digital
+            experiences that make a real impact.
           </BioText>
           <ButtonsContainer>
             <PrimaryButton 
@@ -411,13 +408,12 @@ const ProfileSection = () => {
           </SocialLinks>
         </ContentSection>
         
-        {/* Simplified Image Section - Just the image */}
         <ProfileImage 
           src="/ProfileImage.png" 
           alt="Profile"
           onError={(e) => {
             console.error("Profile image failed to load");
-            e.target.src = "/fallback-profile.png"; // Optional fallback
+            e.target.src = "/fallback-profile.png";
           }}
         />
       </HeroContainer>

@@ -2,7 +2,7 @@
 :root {
   /* Colors */
   --clr-primary: #0066cc;
-  --clr-secondary: #4d9fff;
+  --clr-secondary: #3d74b2b3;
   --clr-background-light: #ffffff;
   --clr-background-dark: #1a1a1a;
   --clr-text-primary-light: #333333;
@@ -13,7 +13,7 @@
   --clr-accent-dark: rgba(57, 82, 211, 0.72);
   
   /* Gradients */
-  --card-gradient: linear-gradient(135deg, rgba(84, 204, 255, 0.174), rgba(137, 21, 220, 0.182));
+  --card-gradient: linear-gradient(135deg, rgba(36, 156, 226, 0.367), rgba(125, 48, 180, 0.166));
   
   /* Shadows */
   --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.15);

@@ -80,17 +80,33 @@ const ImageContainer = styled.div`
 const HighlightsList = styled.ul`
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
   margin-top: 2rem;
 `;
 
 const HighlightItem = styled(Card)`
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   text-align: center;
+  font-size: 0.9rem;
   font-weight: 500;
-  background-color: ${({ theme }) => theme.cardBackground};
-  color: ${({ theme }) => theme.text};
+  background: var(--card-gradient);
+  color: var(--clr-text);
+  border-radius: 20px;
+  border: 1px solid var(--clr-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--clr-accent);
+    box-shadow: 0 4px 12px rgba(var(--clr-accent-rgb), 0.15);
+    color: var(--clr-accent);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 // Organic shapes for the background
@@ -149,24 +165,25 @@ const AboutSection = () => {
         <AboutText>
           <SectionTitle>About Me</SectionTitle>
           <p>
-            I am a Technology Consultant, Software Developer, and Certified Personal Trainer. 
-            My unique combination of skills allows me to bridge the gap between technology 
-            and wellness, creating innovative solutions that enhance both digital and physical well-being.
+            I am a Software Developer and Technology Consultant specializing in modern web development
+            and Apple ecosystem integration. With a strong foundation in front-end technologies
+            and a passion for creating intuitive user experiences, I bring ideas to life through
+            clean, efficient code and thoughtful design.
           </p>
           <p>
-            With experience in customer service, technical support, and software development, 
-            I bring a comprehensive approach to problem-solving and client satisfaction. 
-            My bilingual capabilities in English and Spanish enable me to connect with 
-            and serve a diverse client base effectively.
+            My expertise spans across React, Swift, and modern JavaScript frameworks, with a particular
+            focus on building responsive web applications and native iOS solutions. I pride myself on
+            staying current with emerging technologies and best practices in software development,
+            ensuring that I deliver cutting-edge solutions that meet both user needs and technical requirements.
           </p>
-            <HighlightsList>
-              <HighlightItem>Driven</HighlightItem>
-              <HighlightItem>Analytical</HighlightItem>
-              <HighlightItem>Empathetic</HighlightItem>
-              <HighlightItem>Creative</HighlightItem>
-              <HighlightItem>Resilient</HighlightItem>
-              <HighlightItem>Detail-Oriented</HighlightItem>
-            </HighlightsList>
+          <HighlightsList>
+            <HighlightItem>Problem Solver</HighlightItem>
+            <HighlightItem>Tech Enthusiast</HighlightItem>
+            <HighlightItem>Clean Code Advocate</HighlightItem>
+            <HighlightItem>UI/UX Focused</HighlightItem>
+            <HighlightItem>Continuous Learner</HighlightItem>
+            <HighlightItem>System Architect</HighlightItem>
+          </HighlightsList>
         </AboutText>
       </AboutContent>
     </AboutContainer>
