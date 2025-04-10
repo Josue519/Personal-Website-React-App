@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import React from 'react';
+import { useTheme } from '../../context/ThemeContext';
 import '../../styles/globals.css';
 import Section from '../Shared/Section';
 import styled from 'styled-components';
 
 // Import all section components
-import AboutSection from '../AboutSection';
+import AboutSection from '../sections/About/AboutSection';
 import SpecialtiesSection from '../SpecialtiesSection';
-import JourneySection from '../Journey/JourneySection';
 import EducationSection from '../EducationSection';
-import SkillsSection from '../Skills/SkillsSection';
-import ProfileSection from '../ProfileSection';
+import JourneySection from '../sections/Journey/JourneySection';
+import ProfileSection from '../sections/Profile/ProfileSection';
+import SkillsSection from '../sections/Skills/SkillsSection';
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -21,27 +21,26 @@ const HomeContainer = styled.div`
 `;
 
 const Home = () => {
-  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   return (
-    <HomeContainer>
-      <Section id="profile">
+    <HomeContainer theme={theme}>
+      <Section id="profile" theme={theme}>
         <ProfileSection />
       </Section>
-      <Section id="about">
+      <Section id="about" theme={theme}>
         <AboutSection />
       </Section>
-      <Section id="specialties">
+      <Section id="specialties" theme={theme}>
         <SpecialtiesSection />
       </Section>
-      <Section id="journey">
+      <Section id="journey" theme={theme}>
         <JourneySection />
       </Section>
-      
-      <Section id="skills">
+      <Section id="skills" theme={theme}>
         <SkillsSection />
       </Section>
-      <Section id="education">
+      <Section id="education" theme={theme}>
         <EducationSection />
       </Section>
     </HomeContainer>

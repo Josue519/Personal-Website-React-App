@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp, faCode, faCloud, faDumbbell, faPalette, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp, faCode, faCloud, faPalette, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Card from '../common/Card';
-import { GlobalStyle } from '../../styles/globals';
 import { PrimaryButton } from '../common/Button';
+import PageTitle from '../../components/PageTitle';
 
 const Container = styled.div`
   max-width: 1100px;
   margin: 5rem auto;
   padding: 2rem;
-  background-color: --card-gradient24); 
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--card-gradient);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: var(--glass-border);
   text-align: center;
 `;
 
 const Title = styled.h1`
   color: var(--clr-accent);
   text-align: center;
-  padding-bottom: 1rem;
+  padding-bottom: var(--spacing-md);
 `;
 
 const SectionHeader = styled.div`
@@ -28,38 +28,61 @@ const SectionHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+  padding: var(--spacing-md);
+  background: var(--card-gradient);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md);
+  border: var(--glass-border);
+  margin-bottom: var(--spacing-xs);
+  transition: var(--transition-default);
+  box-shadow: var(--shadow);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
-    color: var(--clr-accent);
-    box-shadow: 0 4px 20px rgba(0, 102, 204, 0.4);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--clr-accent);
   }
 `;
 
 const SectionContent = styled.div`
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  margin-bottom: 1rem;
+  padding: var(--spacing-md);
+  background: var(--card-gradient);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md);
+  border: var(--glass-border);
+  margin-bottom: var(--spacing-md);
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
+  box-shadow: var(--shadow);
 `;
 
 const FloatingButton = styled(PrimaryButton)`
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  padding: 1rem 2rem;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: clamp(0.6rem, 1.5vw, 1rem);
   z-index: 1000;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  background: var(--card-gradient);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  font-weight: 500;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--clr-accent);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    gap: 0.6rem;
+  }
 `;
 
 const specialtiesData = {
@@ -149,8 +172,8 @@ const specialtiesData = {
 const SpecialtiesPage = () => {
   const [openSections, setOpenSections] = useState({
     tech: false,
-    fitness: false,
-    design: false
+    consulting: false,
+    creative: false
   });
 
   const toggleSection = (section) => {
@@ -161,20 +184,20 @@ const SpecialtiesPage = () => {
   };
 
   const handleBookCall = () => {
-    // Add your booking logic here
-    console.log('Booking call...');
+    window.open('https://calendly.com/marantefitness/30min', '_blank');
   };
 
   return (
     <>
-      <GlobalStyle />
+      <PageTitle 
+        title="Specialties" 
+        subtitle="Expertise in modern web development, UI/UX design, and cloud solutions" 
+      />
       <Container>
-        <Title>Specialties</Title>
-        <p style={{paddingBottom: '2rem'}}>
-          I am a Technology Consultant, Software Developer, and Certified Personal Trainer. I offer a wide range of
-          services that integrate technology, business consulting, and health & wellness. My expertise spans software
-          development, IT infrastructure consulting, process optimization, and personal training, allowing me to provide
-          customized solutions for both businesses and individuals.
+        <p style={{paddingBottom: 'var(--spacing-lg)'}}>
+          Throughout my journey in technology, I&apos;ve developed a deep passion for creating beautiful, functional, and user-friendly web applications. 
+          I love the challenge of turning complex problems into elegant solutions and continuously expanding my knowledge in modern web technologies. 
+          My experience spans from crafting pixel-perfect UIs to implementing robust backend systems, always with a focus on delivering exceptional user experiences.
         </p>
         
         {Object.keys(specialtiesData).map((section) => (
@@ -198,8 +221,7 @@ const SpecialtiesPage = () => {
       </Container>
 
       <FloatingButton onClick={handleBookCall}>
-        <FontAwesomeIcon icon={faPhone} />
-        Book a Call
+        <FontAwesomeIcon icon={faPhone} /> Book a Call
       </FloatingButton>
     </>
   );

@@ -1,19 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProjectCard from '../Projects/ProjectCard';
+import ProjectCard from '../sections/Projects/ProjectCard';
 import { projects } from '../../data/projects';
+import PageTitle from '../../components/PageTitle';
 
 const PageContainer = styled.div`
   max-width: 1200px;
   margin: 6rem auto 2rem;
   padding: 2rem;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 2.5rem;
-  color: var(--text-primary);
-  text-align: center;
-  margin-bottom: 3rem;
 `;
 
 const ProjectsGrid = styled.div`
@@ -25,7 +19,10 @@ const ProjectsGrid = styled.div`
 const ProjectsPage = () => {
   return (
     <PageContainer>
-      <PageTitle>My Projects</PageTitle>
+      <PageTitle 
+        title="My Projects" 
+        subtitle="A showcase of my latest work and projects" 
+      />
       <ProjectsGrid>
         {projects.map(project => (
           <ProjectCard key={project.id} project={project} />

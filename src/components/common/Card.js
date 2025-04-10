@@ -3,11 +3,19 @@ import styled from 'styled-components';
 
 const Card = styled.div`
   background: var(--card-gradient);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px var(--shadow);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  padding: 20px;
-  margin: 10px 0;
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md);
+  border: var(--glass-border);
+  box-shadow: var(--shadow);
+  transition: var(--transition-default);
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--clr-accent);
+  }
 
   /* Dynamic typography for headings inside cards */
   h1 {
@@ -47,11 +55,6 @@ const Card = styled.div`
     h3 {
       font-size: clamp(1.1rem, 3vw, 1.3rem);
     }
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--glow-effect), 0 10px 25px var(--shadow-hover);
   }
 `;
 

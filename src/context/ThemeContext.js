@@ -1,51 +1,42 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { lightTheme, darkTheme } from '../styles/themes';
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+  const theme = isDark ? darkTheme : lightTheme;
 
   // Check for saved theme preference on initial load
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
-      setDarkMode(true);
+      setIsDark(true);
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
     }
   }, []);
 
-  // Toggle theme function
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('theme', !darkMode ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', !darkMode ? 'dark' : 'light');
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', !isDark ? 'dark' : 'light');
   };
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-export const lightTheme = {
-  background: '#ffffff',
-  text: '#333333',
-  textSecondary: '#666666',
-  cardGradient: 'linear-gradient(135deg, #ffffff, #f0f0f0)', // Light mode gradient
-  glowEffect: 'rgba(193, 129, 230, 0.5)', // Light mode glow effect
-  hoverGlowEffect: 'rgba(84, 185, 255, 0.3)', // Light mode hover glow effect
-  // ... other theme properties
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
-export const darkTheme = {
-  background: '#121212',
-  text: '#ffffff',
-  textSecondary: '#bbbbbb',
-  cardGradient: 'linear-gradient(135deg, #548bff, #800080)', // Dark mode gradient
-  glowEffect: 'rgba(76, 201, 240, 0.6)', // Dark mode glow effect
-  hoverGlowEffect: 'rgba(128, 0, 128, 0.4)', // Dark mode hover glow effect
-  // ... other theme properties
-}; 
+export { ThemeContext, lightTheme, darkTheme }; 

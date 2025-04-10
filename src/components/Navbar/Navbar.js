@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -33,10 +33,12 @@ const NavLinks = styled.div`
     right: 0;
     background: ${({ theme }) => theme.card};
     padding: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 10px 10px;
+    box-shadow: var(--shadow);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
     border: 1px solid ${({ theme }) => theme.cardBorder};
+    border-top: none;
+    z-index: 999;
   }
 `;
 
@@ -99,6 +101,8 @@ const Navbar = ({ isDark, toggleTheme, showThemeToggle }) => {
   // Handle navigation and scrolling
   const handleNavClick = (event, path, sectionId) => {
     event.preventDefault();
+    setIsMenuOpen(false); // Close menu immediately when a link is clicked
+    
     if (location.pathname !== path) {
       navigate(path);
       setTimeout(() => {
@@ -106,18 +110,38 @@ const Navbar = ({ isDark, toggleTheme, showThemeToggle }) => {
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100); // Delay to ensure the page has loaded
+      }, 100);
     } else {
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    setIsMenuOpen(false);
   };
 
+  // Handle direct navigation (for Specialties and Projects)
+  const handleDirectNav = (event, path) => {
+    event.preventDefault();
+    setIsMenuOpen(false);
+    navigate(path);
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('.navbar-container')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
-    <NavbarContainer>
+    <NavbarContainer className="navbar-container">
       <BrandName>JM</BrandName>
       <MenuButton onClick={toggleMenu}>
         <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
@@ -125,8 +149,8 @@ const Navbar = ({ isDark, toggleTheme, showThemeToggle }) => {
       <NavLinks $isOpen={isMenuOpen}>
         <NavLink to="/" onClick={(e) => handleNavClick(e, '/', 'profile')}>Profile</NavLink>
         <NavLink to="/" onClick={(e) => handleNavClick(e, '/', 'about')}>About</NavLink>
-        <NavLink to="/specialties">Specialties</NavLink>
-        <NavLink to="/projects">Projects</NavLink>
+        <NavLink to="/specialties" onClick={(e) => handleDirectNav(e, '/specialties')}>Specialties</NavLink>
+        <NavLink to="/projects" onClick={(e) => handleDirectNav(e, '/projects')}>Projects</NavLink>
       </NavLinks>
       {showThemeToggle && <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />}
     </NavbarContainer>

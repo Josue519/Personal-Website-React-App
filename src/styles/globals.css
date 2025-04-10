@@ -22,10 +22,11 @@
   --shadow-hover-dark: 0 4px 25px rgba(77, 159, 255, 0.5);
   
   /* Typography */
-  --fs-h1: clamp(1.5rem, 3vw, 2.5rem);
-  --fs-h2: clamp(1.5rem, 3vw, 2.5rem);
-  --fs-h3: clamp(1.25rem, 2.5vw, 2rem);
-  --fs-body: clamp(0.9rem, 1.8vw, 1rem);
+  --fs-h1: clamp(1.75rem, 3vw, 2.5rem);
+  --fs-h2: clamp(1.5rem, 2.5vw, 2rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --fs-body: clamp(0.95rem, 1.5vw, 1.1rem);
+  --fs-small: clamp(0.85rem, 1.2vw, 0.95rem);
   --fw-reg: 300;
   --fw-bold: 500;
   
