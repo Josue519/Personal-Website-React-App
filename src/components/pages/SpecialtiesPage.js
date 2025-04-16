@@ -187,8 +187,14 @@ const SpecialtiesPage = () => {
     window.open('https://calendly.com/marantefitness/30min', '_blank');
   };
 
+  const PageContainer = styled.div`
+  max-width: 1200px;
+  margin: 6rem auto 2rem;
+  padding: 2rem;
+`;
+
   return (
-    <>
+    <PageContainer>
       <PageTitle 
         title="Specialties" 
         subtitle="Expertise in modern web development, UI/UX design, and cloud solutions" 
@@ -223,7 +229,7 @@ const SpecialtiesPage = () => {
       <FloatingButton onClick={handleBookCall}>
         <FontAwesomeIcon icon={faPhone} /> Book a Call
       </FloatingButton>
-    </>
+    </PageContainer>
   );
 };
 

@@ -155,7 +155,7 @@ const JourneySection = () => {
       icon: faTools,
       title: 'Freelance Web Developer / Frontend Specialist',
       company: 'Self-employed',
-      duration: 'Oct 2024 - Present',
+      duration: 'Jul 2024 - Present',
       description: [
         'Engineering modern and responsive web solutions with a focus on React and front-end technologies.',
         'Developing custom web applications and user interfaces for diverse client needs.',
@@ -166,7 +166,7 @@ const JourneySection = () => {
       icon: faTools,
       title: 'Technical Expert',
       company: 'Kaseya',
-      duration: 'Jan 2024 - Jan 2025',
+      duration: 'Jan 2024 - jun 2024',
       description: [
         'Provided hands-on technical support, including troubleshooting software and hardware issues to enhance operational efficiency.',
         'Configured and customized applications, workflows, and integrations, ensuring seamless performance.',

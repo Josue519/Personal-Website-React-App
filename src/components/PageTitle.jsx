@@ -8,7 +8,7 @@ const TitleContainer = styled.div`
   max-width: 1200px;
   width: 90%;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: var(--card-gradient);
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   border-radius: 20px !important;
@@ -33,7 +33,8 @@ const TitleContent = styled.h1`
 
 const SubtitleContent = styled.h2`
   font-size: clamp(1rem, 2.5vw, 1.5rem) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-primary);
+  opacity: 50% !important;
   margin-top: 1rem !important;
   font-weight: 400 !important;
   line-height: 1.5 !important;
