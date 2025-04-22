@@ -27,7 +27,7 @@ export const projects = [
     images: [
       "/XcodeviewofLognApp.png",
       "/ProjectLoginView.png",
-      "/ProjectSignupView.png",
+      "/ProjectSignUpView.png",
   
     ],
     technologies: [
@@ -47,7 +47,7 @@ export const projects = [
     description: "The Meal Tracking App is a native iOS application developed using Swift and Xcode. It features a clean, intuitive interface following iOS design guidelines where users can log their meals, track calories, and monitor macronutrients. The app includes features like meal categorization, custom recipes, and nutritional insights. Built with Core Data for local storage and following MVVM architecture, it provides detailed analytics and progress tracking to help users achieve their health goals. The app demonstrates my proficiency in iOS development and understanding of Apple's Human Interface Guidelines.",
     image: "/Mealtrackingapplogo.png",
     images: [
-      "/ScreenRecording_11-14-2024 20-49-48_1.mp4",
+      "/ScreenRecording_11-14-2024 20-49-48_1.MP4",
       "/IMG_6374.PNG",
     ],
     technologies: [
